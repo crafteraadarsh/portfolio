@@ -1,0 +1,185 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+\usepackage{fontawesome}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+% FIX 1: Removed obsolete 'usenames' option from xcolor
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+% Define custom colors for icons
+\definecolor{phonecolor}{HTML}{27AE60}
+\definecolor{emailcolor}{HTML}{E74C3C}
+\definecolor{linkedincolor}{HTML}{0077B5}
+\definecolor{githubcolor}{HTML}{6E40C9}
+\definecolor{linkcolor}{HTML}{2980B9}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% FIX 2: Set footskip to at least 4.08003pt to suppress fancyhdr warning
+\setlength{\footskip}{4.5pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%----------HEADING----------
+% FIX 3: Separated \textbf and \scshape to avoid undefined OT1/cmr/bx/sc font shape.
+%         Used \textsc instead of \scshape, and kept bold separate.
+%         FIX 4: Wrapped icon commands outside \textbf to avoid bold fontawesome warning.
+\begin{center}
+    {\Huge \textbf{\textsc{Aadarsh Singh}}} \\ \vspace{1pt}
+    \small
+    \href{tel:+919650595492}{{\color{phonecolor}\faPhone}\ {+919650595492}} $|$ ~
+    \href{mailto:aadarsh.singh2108@gmail.com}{{\color{emailcolor}\faEnvelope}\ {aadarsh.singh2108@gmail.com}} $|$ ~
+    \href{https://www.linkedin.com/in/aadarsh01}{{\color{linkedincolor}\faLinkedinSquare}\ {linkedin.com/in/aadarsh01}} $|$ ~
+    \href{https://github.com/crafteraadarsh}{{\color{githubcolor}\faGithub}\ {github.com/crafteraadarsh}}
+\end{center}
+
+%-----------EXPERIENCE-----------
+\section{\textbf{\MakeUppercase{INTERNSHIP \& TRAININGS}}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {0xCommit}{Dubai, United Arab Emirates}
+      {Java \& Blockchain Developer Intern}{Dec 2023 -- April 2025}
+      \resumeItemListStart
+        \resumeItem{Assisted in developing Java-based backend modules using OOP principles to support application features.}
+        \resumeItem{Used REST APIs for data handling and integration between backend services and external systems.}
+        \resumeItem{Performed basic database operations using SQL for querying, inserting, and updating records.}
+        \resumeItem{Helped in debugging and testing Java applications; participated in code reviews and documentation updates.}
+        \resumeItem{Assisted in reviewing smart contract logic and blockchain workflows to ensure correctness and security.}
+        \resumeItem{Performed basic blockchain security analysis and testing to identify potential risks in contract structures.}
+        \resumeItem{Worked on blockchain-based file sharing concepts using IPFS for decentralized data storage.}
+        \resumeItem{Supported documentation and testing for blockchain modules, including writing findings and test notes.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{\textbf{\MakeUppercase{projects}}}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+          {\textbf{{\color{linkcolor}\faExternalLink}\ \href{https://github.com/crafteraadarsh/BlockShare}{BlockShare}} $|$ \emph{Blockchain, IPFS, Solidity, React, Node.js}}{}
+          \resumeItemListStart
+            \resumeItem{Developed a decentralized file sharing and storage system integrating IPFS for distributed file storage and blockchain for secure verification.}
+            \resumeItem{Designed and deployed smart contracts in Solidity to handle access control and file integrity verification.}
+            \resumeItem{Implemented a React-based frontend with a Node.js backend to interact with the blockchain and IPFS network.}
+            \resumeItem{Ensured data consistency and security by leveraging PostgreSQL for metadata storage and user authentication.}
+          \resumeItemListEnd
+      \resumeProjectHeading
+          {\textbf{{\color{linkcolor}\faExternalLink}\ \href{https://github.com/crafteraadarsh/VeloRent}{VeloRent}} $|$ \emph{Java, Spring Boot, JS, Docker}}{}
+          \resumeItemListStart
+            \resumeItem{Developed a web-based bike rental platform using Java and Spring Boot for the backend, handling user authentication, bike listings, and rental management.}
+            \resumeItem{Designed a React frontend to provide an intuitive user interface for browsing, booking, and managing rentals.}
+            \resumeItem{Integrated PostgreSQL for efficient data storage and retrieval of user details, bike availability, and rental history.}
+            \resumeItem{Implemented Stripe API integration for secure and seamless online payment processing.}
+            \resumeItem{Used Docker for containerization, ensuring a scalable and deployable architecture.}
+            \resumeItem{Built an admin panel using Java to manage bike availability, track rentals, and oversee payment transactions.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+%-----------PROGRAMMING SKILLS-----------
+\section{\textbf{\MakeUppercase{Skills}}}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Java, Solidity, JavaScript, HTML/CSS, SQL} \\
+     \textbf{Frameworks}{: Spring Boot, Foundry, Hardhat, React, Node.js, IPFS} \\
+     \textbf{Developer Tools}{: Git, Linux, VS Code, Visual Studio, IntelliJ, Remix IDE, Canva, Zed} \\
+     \textbf{AI Tools}{: Anthropic Claude, OpenAI Codex, GitHub Copilot} \\
+     \textbf{Skills}{: Java Backend Development, Smart Contract Auditing, Frontend Development, Content Creation} \\
+     \textbf{Soft Skills}{: Analytical Thinking, Excellent Planning, Collaborative, Problem Solving} \\
+    }}
+ \end{itemize}
+
+\section{\textbf{\MakeUppercase{Certifications}}}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{0xCommit Bootcamp | 2023}{: Certiﬁcation Number: 02} \\
+     \textbf{Udemy- Javascript Course | 2023}{: Certiﬁcation Number: \href{https://ude.my/UC-1e89766b-8604-4365-9ff0-00568a6f54b0}{{\color{linkcolor}\faExternalLink}\ UC-1e89766b-8604-4365-9ff0-00568a6f54b0}} \\
+     \textbf{IRJMETS -- Paper Publication | 2024}{: DOI: \href{https://www.doi.org/10.56726/IRJMETS63720}{{\color{linkcolor}\faExternalLink}\ https://www.doi.org/10.56726/IRJMETS63720}} \\
+    }}
+ \end{itemize}
+
+%-----------EDUCATION-----------
+\section{\textbf{\MakeUppercase{Education}}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Guru Gobind Singh Indraprastha University}{Delhi, India}
+      {Bachelor of Technology in Information Technology.}{CGPA- 8.360, Year of Passing - 2025}
+    \resumeSubheading
+      {Apex Public School}{Delhi, India}
+      {Class-Xll}{Percentage - 79.33\%, Year of Passing - Sept 2021}
+    \resumeSubheading
+      {Apex Public School}{Delhi, India}
+      {Class-X}{Percentage - 74.5\%, Year of Passing - Mar 2019}
+  \resumeSubHeadingListEnd
+
+\end{document}

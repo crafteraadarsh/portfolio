@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Aadarsh Singh's backend software engineering portfolio with projects, skills, experience, and contact details."
+    />
+    <title>Aadarsh | Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Aadarsh portfolio home">
+        <img class="brand-photo" src="photo.jpg" alt="Aadarsh Singh" />
+        <span>Aadarsh</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow" id="availability"></p>
+          <h1>
+            Hi, I'm Aadarsh Singh
+            <span class="wave" aria-label="waving hand" role="img">👋</span>
+          </h1>
+          <p class="summary" id="summary"></p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">View work</a>
+            <a class="button" href="#contact">Contact</a>
+          </div>
+        </div>
+        <aside class="profile-panel" aria-label="Profile snapshot">
+          <img class="profile-photo" src="photo.jpg" alt="Portrait of Aadarsh Singh" />
+          <div class="profile-details">
+            <div>
+              <p class="panel-label">Location</p>
+              <p id="location"></p>
+            </div>
+          <div>
+            <p class="panel-label">Contact</p>
+            <a id="emailLink" href="#"></a>
+          </div>
+          <div>
+            <p class="panel-label">Phone</p>
+            <a id="phoneLink" href="#"></a>
+          </div>
+          <div class="social-row" id="socials"></div>
+        </div>
+        </aside>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <h2>Backend-focused application work</h2>
+        </div>
+        <div class="project-grid" id="projectGrid"></div>
+      </section>
+
+      <section class="section split" id="skills">
+        <div class="section-heading">
+          <h2>Skills and technologies</h2>
+        </div>
+        <div class="skill-cloud" id="skillCloud"></div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-heading">
+          <h2>Experience and education</h2>
+        </div>
+        <div class="timeline-wrap">
+          <div>
+            <h3>Experience</h3>
+            <div class="timeline" id="experienceList"></div>
+          </div>
+          <div>
+            <h3>Education</h3>
+            <div class="timeline" id="educationList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="certifications">
+        <div class="section-heading">
+          <h2>Certifications and publications</h2>
+        </div>
+        <div class="cert-grid" id="certificationList"></div>
+      </section>
+
+      <section class="contact-band" id="contact">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Have a role, project, or collaboration in mind?</h2>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" id="contactEmail" href="#">Email me</a>
+          <button class="button" id="copyEmail" type="button">Copy email</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year"></span> Aadarsh Singh.</p>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
