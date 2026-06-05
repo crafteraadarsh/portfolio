@@ -5,8 +5,8 @@ export const portfolio = {
   email: "aadarsh.singh2108@gmail.com",
   phone: "+919650595492",
   summary:
-    "I like getting close to unfamiliar problems, learning the stack quickly, and turning ideas into working software. Backend systems are my base, AI has my attention, and I am always ready for the next hard thing.",
-  availability: "Backend-focused fresher open to software engineering roles",
+    "I'm a fresher software engineer who genuinely enjoys the process of learning — picking up a new language, debugging an unfamiliar codebase, or figuring out why something breaks in production. My foundation is in backend development, but I'm open to any engineering role where I can contribute from day one and keep growing. ",
+  availability: "I'am a fresher open to software engineering roles",
   socials: [
     { label: "GitHub", url: "https://github.com/crafteraadarsh" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/aadarsh01" },
