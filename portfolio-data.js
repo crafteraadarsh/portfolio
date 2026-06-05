@@ -72,7 +72,7 @@ export const portfolio = {
       ]
     }
   ],
-  experience: [
+  internships: [
     {
       role: "Java & Blockchain Developer Intern",
       company: "0xCommit",
