@@ -31,7 +31,6 @@ function socialLinks() {
 /* ---------- Content ---------- */
 
 function renderProfile() {
-  document.title = `${portfolio.name} | Portfolio`;
   setText("#brandName", portfolio.name);
   setText("#heroName", `${portfolio.name} — Portfolio`);
   setText("#heroLocation", portfolio.location);
@@ -200,6 +199,12 @@ function bindAsk() {
 
 function bindReveal() {
   const items = document.querySelectorAll(".reveal");
+  // Siblings in the same grid arrive one after another rather than all at once.
+  document.querySelectorAll(".timeline, .cert-grid, .contact").forEach((group) => {
+    [...group.children]
+      .filter((child) => child.classList.contains("reveal"))
+      .forEach((child, index) => child.style.setProperty("--reveal-delay", `${Math.min(index, 4) * 90}ms`));
+  });
   if (!("IntersectionObserver" in window)) {
     items.forEach((item) => item.classList.add("in"));
     return;
@@ -220,7 +225,8 @@ function bindReveal() {
 
 function scrambleHeadline() {
   if (reducedMotionQuery.matches) return;
-  const glyphs = "▚▞▖▗▘▝#/<>_=+*01";
+  // Plain characters the display font has, so the line size stays steady while it scrambles.
+  const glyphs = "#/<>_=+*01XZ";
   const lines = [...document.querySelectorAll("#heroTitle .line")];
   const start = performance.now();
   const duration = 1100;
@@ -254,6 +260,7 @@ function bindScrollMotion() {
   const measure = () => {
     viewportH = window.innerHeight;
     docH = document.documentElement.scrollHeight;
+    lastKey = "";
   };
   window.addEventListener("resize", measure, { passive: true });
   window.addEventListener("load", measure);
@@ -295,6 +302,7 @@ function bindScrollMotion() {
     motion.reform = back;
   }
 
+  let lastKey = "";
   let running = true;
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) {
@@ -312,9 +320,14 @@ function bindScrollMotion() {
     if (Math.abs(state.scroll - state.smooth) < 0.1) state.smooth = state.scroll;
     computeMotion(state.smooth);
 
-    root.style.setProperty("--burst", motion.burst.toFixed(4));
-    root.style.setProperty("--progress", motion.progress.toFixed(4));
-    root.style.setProperty("--scroll-vh", Math.min(motion.scrollVh, 2).toFixed(4));
+    // Only touch the page styles when the scroll position has actually moved.
+    const key = state.smooth.toFixed(1);
+    if (key !== lastKey) {
+      lastKey = key;
+      root.style.setProperty("--burst", motion.burst.toFixed(4));
+      root.style.setProperty("--progress", motion.progress.toFixed(4));
+      root.style.setProperty("--scroll-vh", Math.min(motion.scrollVh, 2).toFixed(4));
+    }
 
     if (!reducedMotionQuery.matches) {
       visibleCards.forEach((card) => {
@@ -350,7 +363,14 @@ function smoothstep(edge0, edge1, x) {
 function hasWebGL() {
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl"));
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    if (!gl) return false;
+    // Without a real graphics chip the 3D scene would run on the CPU and make the page sluggish;
+    // the lighter CSS emblem is used instead.
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : "";
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return !/swiftshader|llvmpipe|softpipe|software/i.test(renderer);
   } catch {
     return false;
   }
@@ -370,8 +390,8 @@ function whenIdle() {
 async function startStage(motion) {
   if (reducedMotionQuery.matches || !hasWebGL()) return;
   const lite = isSmallScreen();
-  // On phones the static emblem shows first; the 3D scene loads once the page is idle.
-  if (lite) await whenIdle();
+  // The CSS emblem paints first; the 3D scene loads once the page has finished loading and is idle.
+  await whenIdle();
   try {
     const { createStage } = await import("./scene.js");
     const started = createStage($("#stageCanvas"), motion, { lite });

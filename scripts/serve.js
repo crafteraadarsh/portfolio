@@ -13,6 +13,14 @@ const types = {
   ".tex": "text/plain; charset=utf-8",
   ".txt": "text/plain; charset=utf-8",
   ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".webp": "image/webp",
+  ".avif": "image/avif",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".pdf": "application/pdf",
+  ".xml": "application/xml; charset=utf-8",
+  ".webmanifest": "application/manifest+json; charset=utf-8",
   ".woff2": "font/woff2"
 };
 
@@ -27,18 +35,23 @@ createServer((request, response) => {
     return;
   }
 
-  if (!existsSync(filePath)) {
-    filePath = join(root, "index.html");
-  }
-
-  if (statSync(filePath).isDirectory()) {
+  let status = 200;
+  if (existsSync(filePath) && statSync(filePath).isDirectory()) {
     filePath = join(filePath, "index.html");
   }
 
-  response.writeHead(200, {
+  // Mirror the host: unknown paths get the 404 page with a 404 status.
+  if (!existsSync(filePath)) {
+    filePath = join(root, "404.html");
+    status = 404;
+  }
+
+  response.writeHead(status, {
     "Content-Type": types[extname(filePath)] || "application/octet-stream"
   });
-  createReadStream(filePath).pipe(response);
+  createReadStream(filePath)
+    .on("error", () => response.end())
+    .pipe(response);
 }).listen(port, () => {
   console.log(`Portfolio available at http://localhost:${port}`);
 });
