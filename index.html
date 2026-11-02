@@ -1,117 +1,182 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta
       name="description"
-      content="Aadarsh Singh's backend software engineering portfolio with projects, skills, experience, and contact details."
+      content="Aadarsh Singh: software developer working on Python, AI agents and Web3 security. Projects, experience, skills and contact details."
     />
+    <meta name="theme-color" content="#050507" />
     <title>Aadarsh | Portfolio</title>
+    <link rel="preload" href="fonts/silkscreen-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.documentElement.classList.replace("no-js", "js");
+    </script>
   </head>
   <body>
+    <a class="skip-link" href="#about">Skip to content</a>
+
+    <div class="stage" aria-hidden="true">
+      <canvas class="stage-canvas" id="stageCanvas"></canvas>
+      <div class="stage-fallback">
+        <div class="emblem-fallback">
+          <span class="emblem-ring"></span>
+          <span class="emblem-ring ring-2"></span>
+          <span class="emblem-core"></span>
+        </div>
+      </div>
+      <div class="stage-glow"></div>
+      <div class="stage-grain"></div>
+    </div>
+
     <header class="site-header">
       <a class="brand" href="#top" aria-label="Aadarsh portfolio home">
-        <img class="brand-photo" src="photo.jpg" alt="Aadarsh Singh" />
-        <span>Aadarsh</span>
+        <img class="brand-photo" src="photo.jpg" alt="" width="36" height="36" />
+        <span class="brand-name" id="brandName">Aadarsh Singh</span>
       </a>
-      <nav aria-label="Main navigation">
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
+      <nav class="pill-nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <span class="pill-line" aria-hidden="true"></span>
         <a href="#contact">Contact</a>
       </nav>
-      <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle theme">
-        <span aria-hidden="true">◐</span>
-      </button>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow" id="availability"></p>
-          <h1>
-            Hi, I'm Aadarsh Singh
-            <span class="wave" aria-label="waving hand" role="img">👋</span>
-          </h1>
-          <p class="summary" id="summary"></p>
-          <div class="hero-actions">
-            <a class="button primary" href="#projects">View work</a>
-            <a class="button" href="#contact">Contact</a>
-          </div>
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-top">
+          <p class="mono-tag"><span class="dot" aria-hidden="true"></span><span id="heroName"></span></p>
+          <p class="mono-tag" id="heroLocation"></p>
         </div>
-        <aside class="profile-panel" aria-label="Profile snapshot">
-          <img class="profile-photo" src="photo.jpg" alt="Portrait of Aadarsh Singh" />
-          <div class="profile-details">
-            <div>
-              <p class="panel-label">Location</p>
-              <p id="location"></p>
-            </div>
-          <div>
-            <p class="panel-label">Contact</p>
-            <a id="emailLink" href="#"></a>
-          </div>
-          <div>
-            <p class="panel-label">Phone</p>
-            <a id="phoneLink" href="#"></a>
-          </div>
-          <div class="social-row" id="socials"></div>
+
+        <div class="hero-center">
+          <h1 class="display" id="heroTitle"></h1>
+          <p class="hero-sub" id="availability"></p>
         </div>
-        </aside>
+
+        <div class="hero-bottom">
+          <div class="looking">
+            <p class="looking-title">What are you looking for?</p>
+            <ul class="looking-list">
+              <li><a href="#work"><span aria-hidden="true">→</span> Projects</a></li>
+              <li><a href="#skills"><span aria-hidden="true">→</span> Skills</a></li>
+              <li><a href="#experience"><span aria-hidden="true">→</span> Experience</a></li>
+              <li><a href="#certifications"><span aria-hidden="true">→</span> Certifications</a></li>
+              <li><a href="#contact"><span aria-hidden="true">→</span> Contact</a></li>
+            </ul>
+            <form class="ask" id="askForm">
+              <label class="visually-hidden" for="askInput">Ask me anything (opens your email app)</label>
+              <input
+                id="askInput"
+                name="question"
+                type="text"
+                autocomplete="off"
+                placeholder="Ask me anything…"
+              />
+              <button type="submit" aria-label="Send question by email">→</button>
+            </form>
+          </div>
+          <a class="scroll-cue" href="#about">
+            <span>Scroll</span>
+            <span class="scroll-bar" aria-hidden="true"></span>
+          </a>
+        </div>
       </section>
 
-      <section class="section" id="projects">
-        <div class="section-heading">
-          <h2>Backend-focused application work</h2>
+      <section class="section about" id="about" aria-labelledby="aboutTitle">
+        <div class="section-head reveal">
+          <p class="section-index">01 / About</p>
+          <h2 class="section-title glitch" id="aboutTitle" data-text="Hi, I'm Aadarsh Singh">Hi, I'm Aadarsh Singh</h2>
         </div>
-        <div class="project-grid" id="projectGrid"></div>
+        <div class="about-grid">
+          <figure class="portrait glass reveal">
+            <img src="photo.jpg" alt="Portrait of Aadarsh Singh" width="800" height="800" loading="lazy" />
+          </figure>
+          <div class="about-copy reveal">
+            <p class="summary" id="summary"></p>
+            <dl class="facts">
+              <div>
+                <dt>Location</dt>
+                <dd id="location"></dd>
+              </div>
+              <div>
+                <dt>Contact</dt>
+                <dd><a id="emailLink" href="#"></a></dd>
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd><a id="phoneLink" href="#"></a></dd>
+              </div>
+            </dl>
+            <div class="social-row" id="socials"></div>
+          </div>
+        </div>
       </section>
 
-      <section class="section split" id="skills">
-        <div class="section-heading">
-          <h2>Skills and technologies</h2>
+      <section class="section work" id="work" aria-labelledby="workTitle">
+        <div class="section-head reveal">
+          <p class="section-index">02 / Work</p>
+          <h2 class="section-title glitch" id="workTitle" data-text="Python, AI and Web3 projects">
+            Python, AI and Web3 projects
+          </h2>
         </div>
-        <div class="skill-cloud" id="skillCloud"></div>
+        <div class="card-stage" id="projectGrid"></div>
       </section>
 
-      <section class="section" id="experience">
-        <div class="section-heading">
-          <h2>Experience and education</h2>
+      <section class="section skills" id="skills" aria-labelledby="skillsTitle">
+        <div class="section-head reveal">
+          <p class="section-index">03 / Skills</p>
+          <h2 class="section-title glitch" id="skillsTitle" data-text="Skills and technologies">Skills and technologies</h2>
+        </div>
+        <div class="marquee" aria-hidden="true"><div class="marquee-track" id="skillMarquee"></div></div>
+        <ul class="skill-groups reveal" id="skillCloud"></ul>
+      </section>
+
+      <section class="section" id="experience" aria-labelledby="experienceTitle">
+        <div class="section-head reveal">
+          <p class="section-index">04 / Experience</p>
+          <h2 class="section-title glitch" id="experienceTitle" data-text="Experience and education">
+            Experience and education
+          </h2>
         </div>
         <div class="timeline-wrap">
           <div>
-            <h3>Internships</h3>
+            <h3 class="column-title">Internships</h3>
             <div class="timeline" id="experienceList"></div>
           </div>
           <div>
-            <h3>Education</h3>
+            <h3 class="column-title">Education</h3>
             <div class="timeline" id="educationList"></div>
           </div>
         </div>
       </section>
 
-      <section class="section" id="certifications">
-        <div class="section-heading">
-          <h2>Certifications and publications</h2>
+      <section class="section" id="certifications" aria-labelledby="certTitle">
+        <div class="section-head reveal">
+          <p class="section-index">05 / Certifications</p>
+          <h2 class="section-title glitch" id="certTitle" data-text="Certifications and research">
+            Certifications and research
+          </h2>
         </div>
         <div class="cert-grid" id="certificationList"></div>
       </section>
 
-      <section class="contact-band" id="contact">
-        <div>
-          <p class="eyebrow">Contact</p>
-          <h2>Have a role, project, or collaboration in mind?</h2>
+      <section class="contact" id="contact" aria-labelledby="contactTitle">
+        <p class="section-index reveal">06 / Contact</p>
+        <h2 class="display contact-title reveal" id="contactTitle">Have a role, project, or collaboration in mind?</h2>
+        <div class="contact-actions reveal">
+          <a class="pill-button solid" id="contactEmail" href="#">Email me <span aria-hidden="true">→</span></a>
+          <button class="pill-button" id="copyEmail" type="button">Copy email</button>
         </div>
-        <div class="contact-actions">
-          <a class="button primary" id="contactEmail" href="#">Email me</a>
-          <button class="button" id="copyEmail" type="button">Copy email</button>
-        </div>
+        <div class="social-row contact-socials reveal" id="contactSocials"></div>
       </section>
     </main>
 
-    <footer>
+    <footer class="site-footer">
       <p>© <span id="year"></span> Aadarsh Singh.</p>
+      <a href="#top">Back to top ↑</a>
     </footer>
 
     <script type="module" src="app.js"></script>

@@ -11,7 +11,9 @@ const types = {
   ".js": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8",
   ".tex": "text/plain; charset=utf-8",
-  ".txt": "text/plain; charset=utf-8"
+  ".txt": "text/plain; charset=utf-8",
+  ".jpg": "image/jpeg",
+  ".woff2": "font/woff2"
 };
 
 createServer((request, response) => {

@@ -28,3 +28,9 @@ Import this folder into Vercel. The included `vercel.json` uses:
 
 - Build command: `npm run build`
 - Output directory: `dist`
+
+## Design notes
+
+- `scene.js` draws the 3D glass emblem and particle field. It only loads on browsers with WebGL and when reduced motion is off; otherwise a lighter CSS emblem is shown. Phones get fewer particles.
+- `vendor/three.module.js` is a trimmed, minified build of three.js (MIT). Regenerate it with the command in `scripts/three-entry.js` if `scene.js` needs more of the library.
+- Fonts in `fonts/` (Silkscreen and JetBrains Mono) are self-hosted under the SIL Open Font License.
