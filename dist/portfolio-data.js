@@ -1,11 +1,11 @@
 export const portfolio = {
   name: "Aadarsh Singh",
-  role: "Software Development Intern",
+  role: "Software Developer",
   location: "Delhi, India",
   email: "aadarsh.singh2108@gmail.com",
   phone: "+919650595492",
   summary:
-    "Software Development Intern at Blessing Softtech, focused on application security for an AI voice agent platform. Previously 16 months at 0xCommit as a Python & Blockchain intern, building backend modules and auditing Solidity smart contracts. B.Tech IT (2025), with a focus on Python, AI agents and Web3 security.",
+    "Software Developer at Blessing Softtech, focused on application security for an AI voice agent platform. Previously 16 months at 0xCommit as a Python & Blockchain intern, building backend modules and auditing Solidity smart contracts. B.Tech IT (2025), with a focus on Python, AI agents and Web3 security.",
   availability: "Python · AI agents · Web3 security",
   socials: [
     { label: "GitHub", url: "https://github.com/crafteraadarsh" },
@@ -61,7 +61,7 @@ export const portfolio = {
   ],
   experience: [
     {
-      role: "Software Development Intern",
+      role: "Software Developer",
       company: "Blessing Softtech",
       location: "Delhi, India (Remote)",
       period: "Oct 2026 – Present",
