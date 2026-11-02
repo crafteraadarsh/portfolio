@@ -3,21 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Aadarsh Singh | Software Development Intern: Python, AI Agents, Web3 Security</title>
     <meta
       name="description"
-      content="Aadarsh Singh: software developer working on Python, AI agents and Web3 security. Projects, experience, skills and contact details."
+      content="Aadarsh Singh, Software Development Intern at Blessing Softtech. Python backend work, AI agents and Web3 security: smart contract audits, application security reviews and projects."
     />
+    <meta name="author" content="Aadarsh Singh" />
     <meta name="theme-color" content="#050507" />
-    <title>Aadarsh | Portfolio</title>
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href="https://aadarsh-singh-portfolio.vercel.app/" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Aadarsh Singh" />
+    <meta property="og:title" content="Aadarsh Singh | Software Development Intern" />
+    <meta property="og:description" content="Python, AI agents and Web3 security. Projects, experience, skills and contact details." />
+    <meta property="og:url" content="https://aadarsh-singh-portfolio.vercel.app/" />
+    <meta property="og:image" content="https://aadarsh-singh-portfolio.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aadarsh Singh, Software Development Intern: Python, AI agents, Web3 security" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="profile:first_name" content="Aadarsh" />
+    <meta property="profile:last_name" content="Singh" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aadarsh Singh | Software Development Intern" />
+    <meta name="twitter:description" content="Python, AI agents and Web3 security. Projects, experience, skills and contact details." />
+    <meta name="twitter:image" content="https://aadarsh-singh-portfolio.vercel.app/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Aadarsh Singh, Software Development Intern: Python, AI agents, Web3 security" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <link rel="preload" href="fonts/silkscreen-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="fonts/jetbrains-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aadarsh Singh",
+        "jobTitle": "Software Development Intern",
+        "url": "https://aadarsh-singh-portfolio.vercel.app/",
+        "image": "https://aadarsh-singh-portfolio.vercel.app/photo.jpg",
+        "email": "mailto:aadarsh.singh2108@gmail.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Delhi", "addressCountry": "IN" },
+        "worksFor": { "@type": "Organization", "name": "Blessing Softtech" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Guru Gobind Singh Indraprastha University" },
+        "knowsAbout": ["Python", "AI agents", "Web3 security", "Smart contract auditing", "Solidity", "Django"],
+        "sameAs": ["https://github.com/crafteraadarsh", "https://www.linkedin.com/in/aadarsh01"]
+      }
+    </script>
     <script>
       document.documentElement.classList.replace("no-js", "js");
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#about">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <div class="stage" aria-hidden="true">
       <canvas class="stage-canvas" id="stageCanvas"></canvas>
@@ -33,27 +76,37 @@
     </div>
 
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="Aadarsh portfolio home">
-        <img class="brand-photo" src="photo.jpg" alt="" width="36" height="36" />
+      <a class="brand" href="#top" aria-label="Aadarsh Singh, back to top">
+        <picture>
+          <source srcset="img/avatar-72.webp" type="image/webp" />
+          <img class="brand-photo" src="img/avatar-72.jpg" alt="" width="36" height="36" decoding="async" />
+        </picture>
         <span class="brand-name" id="brandName">Aadarsh Singh</span>
       </a>
       <nav class="pill-nav" aria-label="Main navigation">
         <a href="#work">Work</a>
+        <a class="nav-extra" href="#experience">Experience</a>
         <span class="pill-line" aria-hidden="true"></span>
         <a href="#contact">Contact</a>
+        <a class="nav-resume" href="resume.pdf" download="Aadarsh_Singh_Resume.pdf">Résumé <span aria-hidden="true">↓</span></a>
       </nav>
     </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="heroTitle">
+    <main id="main" tabindex="-1">
+      <section class="hero" id="top" aria-labelledby="heroTitle">
         <div class="hero-top">
           <p class="mono-tag"><span class="dot" aria-hidden="true"></span><span id="heroName"></span></p>
           <p class="mono-tag" id="heroLocation"></p>
         </div>
 
         <div class="hero-center">
-          <h1 class="display" id="heroTitle"></h1>
-          <p class="hero-sub" id="availability"></p>
+          <h1 class="display" id="heroTitle">Software Development Intern</h1>
+          <p class="hero-sub" id="availability">Python · AI agents · Web3 security</p>
+          <div class="hero-cta">
+            <a class="pill-button solid" href="#work">View work <span class="arr" aria-hidden="true">→</span></a>
+            <a class="pill-button" href="#contact">Contact</a>
+            <a class="pill-button" href="resume.pdf" download="Aadarsh_Singh_Resume.pdf"><span class="cta-long">Download&nbsp;</span>résumé <span aria-hidden="true">↓</span></a>
+          </div>
         </div>
 
         <div class="hero-bottom">
@@ -92,7 +145,20 @@
         </div>
         <div class="about-grid">
           <figure class="portrait glass reveal">
-            <img src="photo.jpg" alt="Portrait of Aadarsh Singh" width="800" height="800" loading="lazy" />
+            <picture>
+              <source type="image/avif" srcset="img/portrait-400.avif 400w, img/portrait-800.avif 800w" sizes="(max-width: 900px) min(80vw, 20rem), 25rem" />
+              <source type="image/webp" srcset="img/portrait-400.webp 400w, img/portrait-800.webp 800w" sizes="(max-width: 900px) min(80vw, 20rem), 25rem" />
+              <img
+                src="img/portrait-800.jpg"
+                srcset="img/portrait-400.jpg 400w, img/portrait-800.jpg 800w"
+                sizes="(max-width: 900px) min(80vw, 20rem), 25rem"
+                alt="Portrait of Aadarsh Singh"
+                width="800"
+                height="800"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </figure>
           <div class="about-copy reveal">
             <p class="summary" id="summary"></p>
@@ -169,14 +235,15 @@
         <div class="contact-actions reveal">
           <a class="pill-button solid" id="contactEmail" href="#">Email me <span aria-hidden="true">→</span></a>
           <button class="pill-button" id="copyEmail" type="button">Copy email</button>
+          <a class="pill-button" href="resume.pdf" download="Aadarsh_Singh_Resume.pdf">Download résumé <span aria-hidden="true">↓</span></a>
         </div>
         <div class="social-row contact-socials reveal" id="contactSocials"></div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="year"></span> Aadarsh Singh.</p>
-      <a href="#top">Back to top ↑</a>
+      <p>© <span id="year">2026</span> Aadarsh Singh</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
     </footer>
 
     <script type="module" src="app.js"></script>

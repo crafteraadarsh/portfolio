@@ -15,6 +15,17 @@ const files = [
   "portfolio-data.js",
   "scene.js",
   "photo.jpg",
+  "404.html",
+  "resume.pdf",
+  "og-image.jpg",
+  "favicon.ico",
+  "favicon.svg",
+  "apple-touch-icon.png",
+  "site.webmanifest",
+  "robots.txt",
+  "sitemap.xml",
+  "img",
+  "icons",
   "fonts",
   "vendor"
 ];
