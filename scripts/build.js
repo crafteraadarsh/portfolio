@@ -13,11 +13,14 @@ const files = [
   "styles.css",
   "app.js",
   "portfolio-data.js",
-  "photo.jpg"
+  "scene.js",
+  "photo.jpg",
+  "fonts",
+  "vendor"
 ];
 
 await Promise.all(
-  files.map((file) => cp(join(root, file), join(dist, file), { force: true }))
+  files.map((file) => cp(join(root, file), join(dist, file), { force: true, recursive: true }))
 );
 
 console.log("Built static portfolio into dist/");
