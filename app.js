@@ -8,6 +8,7 @@ const escapeHtml = (value = "") =>
 
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const isSmallScreen = () => window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
+const isTouch = () => window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
 function setText(selector, value) {
   const element = $(selector);
@@ -64,7 +65,7 @@ function renderProjects() {
         <article class="project-card glass" data-index="${index}">
           <div class="project-meta">
             <span>${number} / ${escapeHtml(project.category)}</span>
-            <span>${escapeHtml(project.year)}</span>
+            ${project.year ? `<span>${escapeHtml(project.year)}</span>` : ""}
           </div>
           <h3 class="project-title glitch" data-text="${escapeHtml(project.title)}">${escapeHtml(project.title)}</h3>
           ${
@@ -75,14 +76,14 @@ function renderProjects() {
           <ul class="tags" aria-label="Tech stack">
             ${project.stack.map((skill) => `<li>${escapeHtml(skill)}</li>`).join("")}
           </ul>
-          <div class="card-links">
+          ${project.links && project.links.length ? `<div class="card-links">
             ${project.links
               .map(
                 (link) =>
                   `<a class="chip-link" href="${escapeHtml(link.url)}"${externalAttrs(link.url)}>${escapeHtml(link.label)} <span class="arr" aria-hidden="true">→</span></a>`
               )
               .join("")}
-          </div>
+          </div>` : ""}
         </article>
       `;
     })
@@ -90,8 +91,19 @@ function renderProjects() {
 }
 
 function renderSkills() {
-  $("#skillCloud").innerHTML = portfolio.skills.map((skill) => `<li>${escapeHtml(skill)}</li>`).join("");
-  const run = portfolio.skills.map((skill) => `<span class="sk">${escapeHtml(skill)}</span><span class="sep">/</span>`).join("");
+  const groups = portfolio.skillGroups || [{ label: "Skills", items: portfolio.skills || [] }];
+  $("#skillCloud").innerHTML = groups
+    .map(
+      (group) => `
+        <li class="skill-group">
+          <h3 class="skill-label">${escapeHtml(group.label)}</h3>
+          <ul class="skill-chips">${group.items.map((skill) => `<li>${escapeHtml(skill)}</li>`).join("")}</ul>
+        </li>
+      `
+    )
+    .join("");
+  const all = groups.filter((group) => group.label !== "Soft Skills").flatMap((group) => group.items);
+  const run = all.map((skill) => `<span class="sk">${escapeHtml(skill)}</span><span class="sep">/</span>`).join("");
   // Two copies so the loop is seamless.
   $("#skillMarquee").innerHTML = run + run;
 }
@@ -137,7 +149,7 @@ function renderCertifications() {
           <span>${escapeHtml(item.detail)}</span>
           ${
             item.url
-              ? `<a class="chip-link" href="${escapeHtml(item.url)}"${externalAttrs(item.url)}>View credential <span class="arr" aria-hidden="true">→</span></a>`
+              ? `<a class="chip-link" href="${escapeHtml(item.url)}"${externalAttrs(item.url)}>${escapeHtml(item.linkLabel || "View credential")} <span class="arr" aria-hidden="true">→</span></a>`
               : ""
           }
         </article>
@@ -147,6 +159,13 @@ function renderCertifications() {
 }
 
 /* ---------- Interactions ---------- */
+
+function bindHeader() {
+  const header = $(".site-header");
+  const update = () => header.classList.toggle("scrolled", window.scrollY > 24);
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+}
 
 function bindCopyEmail() {
   const button = $("#copyEmail");
@@ -228,6 +247,7 @@ function bindScrollMotion() {
   const cards = [...document.querySelectorAll(".project-card")];
   const state = { scroll: window.scrollY, smooth: window.scrollY, time: 0 };
   let visibleCards = new Set();
+  const touch = isTouch();
   let viewportH = window.innerHeight;
   let docH = document.documentElement.scrollHeight;
 
@@ -251,9 +271,10 @@ function bindScrollMotion() {
     visibleCards = new Set(cards);
   }
 
-  // Pointer-driven sheen on glass cards.
+  // Pointer-driven sheen on glass cards (mouse only; on touch the sheen follows scroll).
   cards.forEach((card) => {
     card.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return;
       const rect = card.getBoundingClientRect();
       card.style.setProperty("--mx", `${((event.clientX - rect.left) / rect.width) * 100}%`);
       card.style.setProperty("--my", `${((event.clientY - rect.top) / rect.height) * 100}%`);
@@ -274,7 +295,18 @@ function bindScrollMotion() {
     motion.reform = back;
   }
 
+  let running = true;
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      running = false;
+    } else if (!running) {
+      running = true;
+      requestAnimationFrame(tick);
+    }
+  });
+
   function tick(now) {
+    if (!running) return;
     state.time = now / 1000;
     state.smooth += (state.scroll - state.smooth) * 0.12;
     if (Math.abs(state.scroll - state.smooth) < 0.1) state.smooth = state.scroll;
@@ -289,9 +321,10 @@ function bindScrollMotion() {
         const rect = card.getBoundingClientRect();
         const centre = rect.top + rect.height / 2;
         const n = Math.max(-1.2, Math.min(1.2, (centre - viewportH / 2) / viewportH));
-        const tilt = window.innerWidth < 760 ? 0.45 : 1;
+        // Phones get a gentler, scroll-only tilt so cards stay readable.
+        const tilt = window.innerWidth < 760 ? 0.3 : 1;
         const side = Number(card.dataset.index) % 2 === 0 ? 1 : -1;
-        const float = Math.sin(state.time * 0.9 + Number(card.dataset.index) * 1.7) * 6;
+        const float = touch ? 0 : Math.sin(state.time * 0.9 + Number(card.dataset.index) * 1.7) * 6;
         card.style.setProperty("--rx", `${(n * 16 * tilt).toFixed(2)}deg`);
         card.style.setProperty("--ry", `${(n * 10 * side * tilt).toFixed(2)}deg`);
         card.style.setProperty("--tz", `${(-Math.abs(n) * 140 * tilt).toFixed(1)}px`);
@@ -323,11 +356,25 @@ function hasWebGL() {
   }
 }
 
+function whenIdle() {
+  return new Promise((resolve) => {
+    const go = () => {
+      if ("requestIdleCallback" in window) window.requestIdleCallback(resolve, { timeout: 1500 });
+      else setTimeout(resolve, 300);
+    };
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
+  });
+}
+
 async function startStage(motion) {
   if (reducedMotionQuery.matches || !hasWebGL()) return;
+  const lite = isSmallScreen();
+  // On phones the static emblem shows first; the 3D scene loads once the page is idle.
+  if (lite) await whenIdle();
   try {
     const { createStage } = await import("./scene.js");
-    const started = createStage($("#stageCanvas"), motion, { lite: isSmallScreen() });
+    const started = createStage($("#stageCanvas"), motion, { lite });
     if (started) root.classList.add("webgl");
   } catch (error) {
     // The CSS emblem stays visible as the fallback.
@@ -340,6 +387,7 @@ renderProjects();
 renderSkills();
 renderTimeline();
 renderCertifications();
+bindHeader();
 bindCopyEmail();
 bindAsk();
 bindReveal();

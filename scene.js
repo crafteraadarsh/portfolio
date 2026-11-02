@@ -202,7 +202,7 @@ export function createStage(canvas, motion, { lite = false } = {}) {
   const emblem = new Group();
   scene.add(emblem);
 
-  const glassGeometry = new TorusKnotGeometry(1, 0.3, lite ? 160 : 260, lite ? 20 : 36, 2, 3);
+  const glassGeometry = new TorusKnotGeometry(1, 0.3, lite ? 128 : 260, lite ? 16 : 36, 2, 3);
   const glassMaterial = new ShaderMaterial({
     vertexShader: glassVertex,
     fragmentShader: glassFragment,
@@ -216,7 +216,7 @@ export function createStage(canvas, motion, { lite = false } = {}) {
   emblem.add(glass);
 
   const sampleGeometry = new TorusKnotGeometry(1, 0.3, 320, 40, 2, 3);
-  const particleGeometry = buildParticles(sampleGeometry, lite ? 5000 : 16000);
+  const particleGeometry = buildParticles(sampleGeometry, lite ? 2500 : 16000);
   sampleGeometry.dispose();
   const particleMaterial = new ShaderMaterial({
     vertexShader: particleVertex,
@@ -239,6 +239,7 @@ export function createStage(canvas, motion, { lite = false } = {}) {
   window.addEventListener(
     "pointermove",
     (event) => {
+      if (event.pointerType !== "mouse") return;
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = (event.clientY / window.innerHeight) * 2 - 1;
     },
@@ -268,7 +269,27 @@ export function createStage(canvas, motion, { lite = false } = {}) {
   let spin = 0;
   let last = start;
 
+  // Stop drawing while the tab is hidden; on phones also cap to ~30 fps.
+  let running = true;
+  const minFrame = lite ? 1000 / 31 : 0;
+  let lastDraw = 0;
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      running = false;
+    } else if (!running) {
+      running = true;
+      last = performance.now();
+      requestAnimationFrame(render);
+    }
+  });
+
   function render(now) {
+    if (!running) return;
+    if (minFrame && now - lastDraw < minFrame) {
+      requestAnimationFrame(render);
+      return;
+    }
+    lastDraw = now;
     const time = (now - start) / 1000;
     const delta = Math.min(0.05, (now - last) / 1000);
     last = now;
